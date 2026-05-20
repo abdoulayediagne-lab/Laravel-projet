@@ -93,10 +93,21 @@ class GameController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        $scores = $user->scores()->with('character')->orderBy('score', 'desc')->take(10)->get();
-        $totalRuns = $user->scores()->count();
-        $bestScore = $user->bestScore();
+        $scores        = $user->scores()->with('character')->orderBy('score', 'desc')->take(10)->get();
+        $totalRuns     = $user->scores()->count();
+        $bestScore     = $user->bestScore();
+        $totalCoins    = $user->scores()->sum('coins_collected');
+        $totalDuration = $user->scores()->sum('duration');
+        $bestCharacter = Score::with('character')
+            ->where('user_id', $user->id)
+            ->whereNotNull('character_id')
+            ->orderByDesc('score')
+            ->first()
+            ?->character;
 
-        return view('profile.index', compact('user', 'scores', 'totalRuns', 'bestScore'));
+        return view('profile.index', compact(
+            'user', 'scores', 'totalRuns', 'bestScore',
+            'totalCoins', 'totalDuration', 'bestCharacter'
+        ));
     }
 }

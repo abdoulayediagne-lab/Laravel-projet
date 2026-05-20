@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Temple Run' }} — Temple Run</title>
+    <title>@yield('title', 'Street Run') — Street Run</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg:       #0a0a14;
-            --surface:  #12122a;
-            --border:   #2a2a50;
-            --primary:  #7c3aed;
-            --accent:   #06b6d4;
-            --gold:     #fbbf24;
-            --danger:   #ef4444;
-            --success:  #10b981;
-            --text:     #e2e8f0;
-            --muted:    #64748b;
+            --bg:      #000;
+            --surface: #0a0a0a;
+            --border:  #141414;
+            --primary: #dc2626;
+            --accent:  #facc15;
+            --gold:    #facc15;
+            --danger:  #ef4444;
+            --success: #22c55e;
+            --text:    #e5e7eb;
+            --muted:   #3d3d3d;
         }
 
         body {
@@ -31,112 +31,118 @@
         }
 
         nav {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
+            background: #000;
+            border-bottom: 1px solid #111;
             padding: 0 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            height: 56px;
             position: sticky;
             top: 0;
             z-index: 100;
         }
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 56px; height: 2px;
+            background: #dc2626;
+        }
 
         .nav-logo {
             font-family: 'Bangers', cursive;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.6rem;
+            letter-spacing: 4px;
+            color: #fff;
             text-decoration: none;
+            text-transform: uppercase;
+            position: relative;
         }
+        .nav-logo span { color: #dc2626; }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1.8rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--muted);
+            color: #2d2d2d;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.2s;
+            font-weight: 700;
+            font-size: 0.72rem;
+            transition: color 0.15s;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
         }
-
-        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover { color: #e5e7eb; }
 
         .nav-coins {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            background: rgba(251, 191, 36, 0.1);
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            padding: 0.3rem 0.8rem;
-            border-radius: 99px;
-            font-weight: 700;
-            color: var(--gold);
-            font-size: 0.9rem;
+            gap: 0.35rem;
+            border: 1px solid #1c1c1c;
+            padding: 0.25rem 0.7rem;
+            font-weight: 800;
+            color: #facc15;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.9rem;
+            padding: 0.45rem 1rem;
+            font-weight: 800;
+            font-size: 0.72rem;
             cursor: pointer;
             border: none;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.15s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: #6d28d9; transform: translateY(-1px); }
+        .btn-primary { background: #dc2626; color: #fff; }
+        .btn-primary:hover { background: #b91c1c; }
 
-        .btn-accent { background: var(--accent); color: #0a0a14; }
-        .btn-accent:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-accent { background: #facc15; color: #000; }
+        .btn-accent:hover { background: #eab308; }
 
-        .btn-gold { background: var(--gold); color: #0a0a14; }
-        .btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-gold { background: #facc15; color: #000; }
+        .btn-gold:hover { background: #eab308; }
 
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-outline { background: transparent; border: 1px solid #1c1c1c; color: #6b7280; }
+        .btn-outline:hover { border-color: #dc2626; color: #dc2626; }
 
         main {
             padding: 2rem;
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            background: #080808;
+            border: 1px solid #141414;
             padding: 1.5rem;
         }
 
-        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 99px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .badge-base      { background: rgba(100,116,139,0.2); color: #94a3b8; border: 1px solid #334155; }
-        .badge-normal    { background: rgba(6,182,212,0.15);  color: var(--accent); border: 1px solid rgba(6,182,212,0.3); }
-        .badge-legendary { background: rgba(251,191,36,0.15); color: var(--gold);   border: 1px solid rgba(251,191,36,0.4); }
+        .badge { display: inline-block; padding: 0.18rem 0.55rem; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .badge-base      { background: rgba(107,114,128,0.15); color: #4b5563; border: 1px solid #1f2937; }
+        .badge-normal    { background: rgba(59,130,246,0.1);   color: #3b82f6; border: 1px solid rgba(59,130,246,0.25); }
+        .badge-legendary { background: rgba(250,204,21,0.1);   color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
 
         #toast { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem; }
-        .toast-msg { background: var(--surface); border: 1px solid var(--border); padding: 1rem 1.5rem; border-radius: 10px; animation: slideIn 0.3s ease; max-width: 320px; font-size: 0.9rem; }
-        .toast-msg.success { border-color: var(--success); }
-        .toast-msg.error   { border-color: var(--danger); }
+        .toast-msg { background: #0a0a0a; border: 1px solid #141414; padding: 0.9rem 1.3rem; animation: slideIn 0.25s ease; max-width: 300px; font-size: 0.82rem; letter-spacing: 0.5px; }
+        .toast-msg.success { border-left: 3px solid #22c55e; }
+        .toast-msg.error   { border-left: 3px solid #dc2626; }
 
         @keyframes slideIn {
-            from { transform: translateX(120%); opacity: 0; }
-            to   { transform: translateX(0); opacity: 1; }
+            from { transform: translateX(110%); opacity: 0; }
+            to   { transform: translateX(0);    opacity: 1; }
         }
     </style>
     @stack('styles')
@@ -144,22 +150,22 @@
 <body>
 
 <nav>
-    <a href="{{ route('welcome') }}" class="nav-logo">🏃 TEMPLE RUN</a>
+    <a href="{{ route('welcome') }}" class="nav-logo">STREET<span>RUN</span></a>
     <ul class="nav-links">
         @auth
-            <li><a href="{{ route('game.index') }}">🎮 Jouer</a></li>
-            <li><a href="{{ route('collection.index') }}">🃏 Collection</a></li>
-            <li><a href="{{ route('leaderboard.index') }}">🏆 Classement</a></li>
-            <li><a href="{{ route('profile.index') }}">👤 Profil</a></li>
+            <li><a href="{{ route('game.index') }}">Jouer</a></li>
+            <li><a href="{{ route('collection.index') }}">Collection</a></li>
+            <li><a href="{{ route('leaderboard.index') }}">Classement</a></li>
+            <li><a href="{{ route('profile.index') }}">Profil</a></li>
             <li><span class="nav-coins">🪙 {{ Auth::user()->coins }}</span></li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-outline" style="font-size:0.85rem;padding:0.4rem 0.9rem;">Déconnexion</button>
+                    <button type="submit" class="btn btn-outline">Quitter</button>
                 </form>
             </li>
         @else
-            <li><a href="{{ route('leaderboard.index') }}">🏆 Classement</a></li>
+            <li><a href="{{ route('leaderboard.index') }}">Classement</a></li>
             <li><a href="{{ route('login') }}" class="btn btn-outline">Connexion</a></li>
             <li><a href="{{ route('register') }}" class="btn btn-primary">S'inscrire</a></li>
         @endauth

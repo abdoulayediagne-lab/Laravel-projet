@@ -57,6 +57,29 @@
                 <span class="stat-label">🃏 Persos débloqués</span>
                 <span class="stat-val">{{ $user->characters->count() }}</span>
             </div>
+            <div class="stat-row">
+                <span class="stat-label">🪙 Total pièces gagnées</span>
+                <span class="stat-val" style="color:#fbbf24;">{{ number_format($totalCoins) }}</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">⏱️ Temps de jeu total</span>
+                <span class="stat-val">
+                    @php
+                        $h = intdiv($totalDuration, 3600);
+                        $m = intdiv($totalDuration % 3600, 60);
+                        $s = $totalDuration % 60;
+                        $parts = [];
+                        if ($h > 0) $parts[] = $h . 'h';
+                        if ($m > 0) $parts[] = $m . 'm';
+                        $parts[] = $s . 's';
+                    @endphp
+                    {{ implode(' ', $parts) }}
+                </span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">⭐ Meilleur personnage</span>
+                <span class="stat-val">{{ $bestCharacter ? $bestCharacter->emoji . ' ' . $bestCharacter->name : '—' }}</span>
+            </div>
 
             <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.7rem;">
                 <a href="{{ route('game.index') }}" class="btn btn-primary">🎮 Jouer</a>
