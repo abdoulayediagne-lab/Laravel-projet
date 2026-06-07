@@ -8,172 +8,110 @@
 
 /* ===== PREGAME ===== */
 .pregame {
-    background: #000;
-    border: 1px solid #1c1c1c;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
     width: 100%; max-width: 880px;
     overflow: hidden;
     position: relative;
 }
 
-.pg-header {
-    padding: 2.5rem 2.5rem 2rem;
-    background: #050505;
-    border-bottom: 1px solid #141414;
-    position: relative;
-    overflow: hidden;
+.pg-hero {
+    padding: 3.5rem 2.5rem 2.5rem;
+    text-align: center;
 }
-.pg-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 80px; height: 3px;
-    background: #dc2626;
-}
-
-.pg-eyebrow {
-    font-size: 0.6rem; font-weight: 800;
-    text-transform: uppercase; letter-spacing: 5px;
-    color: #dc2626; margin-bottom: 0.5rem;
-}
-
-@keyframes glitch {
-    0%,88%,100% { text-shadow: 3px 0 #dc2626, -3px 0 #3b82f6; transform: none; }
-    90% { text-shadow: -3px 0 #dc2626, 3px 0 #3b82f6; transform: translateX(2px); }
-    92% { text-shadow: 3px 2px #dc2626, -3px -2px #3b82f6; transform: translateX(-2px); clip-path: polygon(0 15%, 100% 15%, 100% 55%, 0 55%); }
-    94% { text-shadow: none; transform: none; clip-path: none; }
-}
-
 .pg-title {
     font-family: 'Bangers', cursive;
-    font-size: 4.5rem; line-height: 1;
-    color: #fff; letter-spacing: 10px;
+    font-size: 4rem; line-height: 1;
+    color: var(--text); letter-spacing: 8px;
     margin: 0; text-transform: uppercase;
-    animation: glitch 7s infinite;
 }
+.pg-title span { color: var(--primary); }
 .pg-sub {
-    font-size: 0.72rem; color: #2d2d2d;
-    text-transform: uppercase; letter-spacing: 3px;
-    margin-top: 0.6rem; font-weight: 700;
+    font-size: 0.85rem; color: var(--muted);
+    margin-top: 0.7rem; font-weight: 600;
 }
 
-/* sections */
-.pg-block {
-    padding: 1.5rem 2.5rem;
-    border-bottom: 1px solid #0f0f0f;
+#start-btn {
+    display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+    width: 100%; max-width: 320px; margin: 1.8rem auto 0;
+    padding: 1.1rem; border-radius: 12px;
+    font-size: 1.25rem; border: none;
+    background: var(--primary);
+    color: #fff; font-weight: 800;
+    cursor: pointer; font-family: 'Bangers', cursive;
+    letter-spacing: 4px; text-transform: uppercase;
+    transition: all 0.15s;
+    box-shadow: 0 8px 24px rgba(37,99,235,0.25);
 }
-.pg-block-inline {
-    padding: 1.2rem 2.5rem;
-    border-bottom: 1px solid #0f0f0f;
-    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+#start-btn:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.32); }
+
+/* Options (compactes, secondaires) */
+.pg-options {
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    padding: 1.5rem 2.5rem 2rem;
+    display: flex; flex-direction: column; gap: 1.3rem;
 }
+.pg-opt-row { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
 .pg-label {
-    font-size: 0.58rem; font-weight: 800;
-    text-transform: uppercase; letter-spacing: 4px;
-    color: #2d2d2d; margin-bottom: 1rem;
+    font-size: 0.62rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: var(--muted); white-space: nowrap; min-width: 80px;
 }
-.pg-block-inline .pg-label { margin-bottom: 0; white-space: nowrap; }
 
 /* Characters */
-.char-grid { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.char-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .char-card {
-    width: 76px; cursor: pointer;
-    border: 1px solid #141414;
-    padding: 0.7rem 0.5rem;
+    width: 64px; cursor: pointer;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 0.55rem 0.4rem;
     text-align: center;
     transition: all 0.12s;
-    background: #060606;
-    position: relative;
+    background: var(--surface);
 }
-.char-card::after {
-    content: ''; position: absolute;
-    bottom: 0; left: 0; right: 0; height: 2px;
-    background: transparent; transition: background 0.12s;
-}
-.char-card:hover { background: #0d0d0d; }
-.char-card:hover::after { background: #facc15; }
-.char-card.selected { border-color: #222; background: #0d0d0d; }
-.char-card.selected::after { background: #facc15; }
-.char-emoji { font-size: 1.9rem; line-height: 1.1; }
-.char-name { font-size: 0.58rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #333; margin-top: 0.3rem; }
+.char-card:hover { border-color: var(--primary); }
+.char-card.selected { border-color: var(--primary); background: rgba(37,99,235,0.06); }
+.char-emoji { font-size: 1.6rem; line-height: 1.1; }
+.char-name { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.5px; color: var(--muted); margin-top: 0.25rem; }
 
 /* Mode cards */
-.mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.mode-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .mode-card {
-    padding: 1.4rem 1.5rem;
-    border: 1px solid #141414;
+    padding: 0.6rem 1.1rem;
+    border: 1.5px solid var(--border); border-radius: 10px;
     cursor: pointer; transition: all 0.12s;
-    background: #060606;
-    position: relative; overflow: hidden;
+    background: var(--surface);
+    text-align: left;
 }
-.mode-card::before {
-    content: ''; position: absolute;
-    inset: 0; opacity: 0; transition: opacity 0.15s;
-}
-.mode-card.active-normal { border-color: #1d4ed8; }
-.mode-card.active-normal::before { background: rgba(29,78,216,0.07); opacity: 1; }
-.mode-card.active-hard   { border-color: #dc2626; }
-.mode-card.active-hard::before   { background: rgba(220,38,38,0.07); opacity: 1; }
-.mode-tag {
-    font-size: 0.55rem; font-weight: 800;
-    letter-spacing: 4px; text-transform: uppercase;
-    color: #1d4ed8; margin-bottom: 0.3rem;
-}
-.mode-tag-red { color: #dc2626; }
+.mode-card.active-normal { border-color: var(--primary); background: rgba(37,99,235,0.06); }
+.mode-card.active-hard   { border-color: var(--danger);  background: rgba(239,68,68,0.06); }
 .mode-title {
-    font-family: 'Bangers', cursive;
-    font-size: 2rem; letter-spacing: 5px;
-    color: #e5e7eb; line-height: 1;
+    font-weight: 800; font-size: 0.8rem; letter-spacing: 1px;
+    color: var(--text); line-height: 1.2;
 }
 .mode-sub {
-    font-size: 0.68rem; color: #333;
-    text-transform: uppercase; letter-spacing: 1px;
-    margin-top: 0.5rem;
+    font-size: 0.66rem; color: var(--muted);
+    margin-top: 0.15rem;
 }
 
 /* Keys */
 .keys-row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
 .key-btn {
-    padding: 0.35rem 0.9rem;
-    border: 1px solid #1a1a1a;
-    background: #060606; color: #444;
-    cursor: pointer; font-weight: 800;
-    font-size: 0.7rem; text-transform: uppercase;
-    letter-spacing: 1.5px; transition: all 0.12s;
+    padding: 0.4rem 0.9rem; border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    cursor: pointer; font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 0.5px;
+    transition: all 0.12s;
     font-family: 'Inter', sans-serif;
 }
-.key-btn.active { border-color: #facc15; color: #facc15; background: rgba(250,204,21,0.05); }
-.keys-hint { font-size: 0.68rem; color: #2a2a2a; text-transform: uppercase; letter-spacing: 2px; }
-
-/* Start button */
-@keyframes pulse-glow {
-    0%,100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.5), inset 0 0 0 0 rgba(220,38,38,0); }
-    50%      { box-shadow: 0 0 20px 4px rgba(220,38,38,0.2), inset 0 1px 0 0 rgba(255,100,100,0.1); }
-}
-#start-btn {
-    display: flex; align-items: center; justify-content: center; gap: 0.8rem;
-    width: 100%; padding: 1.3rem;
-    font-size: 1.5rem; border: none;
-    background: #dc2626;
-    color: #fff; font-weight: 800;
-    cursor: pointer; font-family: 'Bangers', cursive;
-    letter-spacing: 6px; text-transform: uppercase;
-    transition: all 0.15s;
-    animation: pulse-glow 2.5s infinite;
-    position: relative; overflow: hidden;
-}
-#start-btn::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%);
-    transform: translateX(-100%);
-    transition: transform 0.5s;
-}
-#start-btn:hover::before { transform: translateX(100%); }
-#start-btn:hover { background: #b91c1c; letter-spacing: 8px; }
+.key-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(37,99,235,0.06); }
+.keys-hint { font-size: 0.7rem; color: var(--muted); }
 
 /* Canvas */
 #game-container { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 880px; }
-#game-canvas-wrapper { overflow: hidden; border: 1px solid #141414; width: 100%; }
+#game-canvas-wrapper { overflow: hidden; border: 1px solid var(--border); border-radius: 14px; width: 100%; }
 #game-canvas-wrapper canvas { display: block; width: 100% !important; }
 
 /* Game over */
@@ -183,53 +121,49 @@
 }
 #gameover-panel {
     display: none;
-    background: #000; border: 1px solid #1c1c1c;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 18px;
     width: 100%; max-width: 880px;
     overflow: hidden; position: relative;
     animation: fadeSlideIn 0.3s ease;
 }
-#gameover-panel::before {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, #dc2626 0%, #dc262600 100%);
-}
-.go-inner { padding: 3rem 3rem 0; }
+.go-inner { padding: 2.5rem 2.5rem 0; text-align: center; }
 .go-eyebrow {
-    font-size: 0.6rem; font-weight: 800;
-    letter-spacing: 5px; text-transform: uppercase;
-    color: #dc2626; margin-bottom: 0.5rem;
+    font-size: 0.65rem; font-weight: 800;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.4rem;
 }
 .go-title {
     font-family: 'Bangers', cursive;
-    font-size: 5.5rem; letter-spacing: 6px;
-    color: #fff; line-height: 1; margin: 0;
+    font-size: 3.2rem; letter-spacing: 4px;
+    color: var(--text); line-height: 1; margin: 0;
 }
 .go-stats {
     display: flex; align-items: stretch;
-    border-top: 1px solid #111; border-bottom: 1px solid #111;
-    margin-top: 2.5rem;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    margin-top: 2rem;
 }
 .go-stat {
-    flex: 1; padding: 1.5rem 2rem;
-    border-right: 1px solid #111;
+    flex: 1; padding: 1.3rem 1.5rem; text-align: center;
+    border-right: 1px solid var(--border);
 }
 .go-stat:last-child { border-right: none; }
 .go-stat-val {
     font-family: 'Bangers', cursive;
-    font-size: 2.8rem; letter-spacing: 3px;
-    color: #facc15; line-height: 1;
+    font-size: 2.3rem; letter-spacing: 2px;
+    color: var(--primary); line-height: 1;
 }
 .go-stat-key {
-    font-size: 0.55rem; font-weight: 800;
-    text-transform: uppercase; letter-spacing: 4px;
-    color: #2d2d2d; margin-top: 0.4rem;
+    font-size: 0.6rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 3px;
+    color: var(--muted); margin-top: 0.4rem;
 }
-.go-actions { display: flex; gap: 0.6rem; padding: 1.5rem 2rem; flex-wrap: wrap; }
+.go-actions { display: flex; gap: 0.6rem; padding: 1.5rem 2rem; flex-wrap: wrap; justify-content: center; }
 
 /* Chest modal */
 #chest-modal {
     display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.95);
+    background: rgba(51,49,44,0.45);
     z-index: 1000; align-items: center; justify-content: center;
 }
 #chest-modal.show { display: flex; }
@@ -238,39 +172,37 @@
     to   { transform: scale(1) translateY(0); opacity: 1; }
 }
 .chest-box {
-    background: #000; border: 1px solid #1c1c1c;
-    border-top: 2px solid #facc15;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.18);
     padding: 2.5rem; text-align: center;
     max-width: 380px; width: 90%;
     animation: popIn 0.2s ease;
 }
 .chest-tag {
-    font-size: 0.58rem; font-weight: 800;
-    letter-spacing: 5px; text-transform: uppercase;
-    color: #facc15; margin-bottom: 1.2rem;
+    font-size: 0.6rem; font-weight: 800;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.2rem;
 }
 .chest-icon { font-size: 3.5rem; margin-bottom: 0.8rem; }
 .chest-title {
     font-family: 'Bangers', cursive;
-    font-size: 1.8rem; letter-spacing: 5px;
-    color: #fff; margin-bottom: 0.4rem;
+    font-size: 1.6rem; letter-spacing: 3px;
+    color: var(--text); margin-bottom: 0.4rem;
 }
 .chest-desc {
-    font-size: 0.72rem; color: #333;
-    text-transform: uppercase; letter-spacing: 2px;
+    font-size: 0.78rem; color: var(--muted);
     margin-bottom: 2rem;
 }
 .chest-result { display: none; }
 .result-icon { font-size: 3.5rem; margin-bottom: 0.8rem; }
 .result-name {
     font-family: 'Bangers', cursive;
-    font-size: 1.8rem; letter-spacing: 4px;
-    color: #fff; margin-bottom: 0.5rem;
+    font-size: 1.6rem; letter-spacing: 3px;
+    color: var(--text); margin-bottom: 0.5rem;
 }
 .result-rarity { margin-bottom: 0.75rem; }
 .result-msg {
-    font-size: 0.7rem; color: #333;
-    text-transform: uppercase; letter-spacing: 2px;
+    font-size: 0.78rem; color: var(--muted);
     margin-bottom: 1.5rem;
 }
 .btn-full { width: 100%; justify-content: center; padding: 0.9rem 1rem; font-size: 0.95rem; }
@@ -283,54 +215,52 @@
     <!-- PRÉ-JEU -->
     <div class="pregame" id="pregame-panel">
 
-        <div class="pg-header">
-            <div class="pg-eyebrow">City Chase System — v2.0</div>
-            <h1 class="pg-title">STREET RUN</h1>
-            <p class="pg-sub">Fuis. Esquive. Survis.</p>
+        <div class="pg-hero">
+            <h1 class="pg-title">STREET <span>RUN</span></h1>
+            <p class="pg-sub">Cours, saute, esquive — et ne te fais pas rattraper.</p>
+            <button id="start-btn" onclick="startGame()">
+                <span>JOUER</span>
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;flex-shrink:0"><path d="M5 3l14 9-14 9V3z"/></svg>
+            </button>
         </div>
 
-        <div class="pg-block">
-            <div class="pg-label">01 — Runner</div>
-            <div class="char-grid" id="char-grid">
-                @foreach($userCharacters as $char)
-                <div class="char-card {{ $loop->first ? 'selected' : '' }}"
-                     data-id="{{ $char->id }}" onclick="selectChar(this)">
-                    <div class="char-emoji">{{ $char->emoji }}</div>
-                    <div class="char-name">{{ $char->name }}</div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-
-        <div class="pg-block">
-            <div class="pg-label">02 — Mode</div>
-            <div class="mode-grid">
-                <div class="mode-card active-normal" data-diff="normal" onclick="selectDiff(this)">
-                    <div class="mode-tag">Normal</div>
-                    <div class="mode-title">STREET</div>
-                    <div class="mode-sub">Coffre standard après la run</div>
-                </div>
-                <div class="mode-card" data-diff="hard" onclick="selectDiff(this)">
-                    <div class="mode-tag mode-tag-red">Hard</div>
-                    <div class="mode-title">BRUTAL</div>
-                    <div class="mode-sub">Coffre Légendaire si tu survis</div>
+        <div class="pg-options">
+            <div class="pg-opt-row">
+                <span class="pg-label">Personnage</span>
+                <div class="char-grid" id="char-grid">
+                    @foreach($userCharacters as $char)
+                    <div class="char-card {{ $loop->first ? 'selected' : '' }}"
+                         data-id="{{ $char->id }}" onclick="selectChar(this)">
+                        <div class="char-emoji">{{ $char->emoji }}</div>
+                        <div class="char-name">{{ $char->name }}</div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
-        </div>
 
-        <div class="pg-block-inline">
-            <div class="pg-label">03 — Touches</div>
-            <div class="keys-row">
-                <button class="key-btn active" data-keys="arrows" onclick="selectKeys(this)">↑ ← → Flèches</button>
-                <button class="key-btn" data-keys="zqsd" onclick="selectKeys(this)">Z Q D</button>
-                <span class="keys-hint" id="keys-hint">↑ Sauter &nbsp;·&nbsp; ← → Changer de voie</span>
+            <div class="pg-opt-row">
+                <span class="pg-label">Mode</span>
+                <div class="mode-grid">
+                    <div class="mode-card active-normal" data-diff="normal" onclick="selectDiff(this)">
+                        <div class="mode-title">Normal</div>
+                        <div class="mode-sub">Coffre standard après la run</div>
+                    </div>
+                    <div class="mode-card" data-diff="hard" onclick="selectDiff(this)">
+                        <div class="mode-title">Difficile</div>
+                        <div class="mode-sub">Coffre légendaire si tu survis</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pg-opt-row">
+                <span class="pg-label">Touches</span>
+                <div class="keys-row">
+                    <button class="key-btn active" data-keys="arrows" onclick="selectKeys(this)">↑ ← → Flèches</button>
+                    <button class="key-btn" data-keys="zqsd" onclick="selectKeys(this)">Z Q D</button>
+                    <span class="keys-hint" id="keys-hint">↑ Sauter &nbsp;·&nbsp; ← → Changer de voie</span>
+                </div>
             </div>
         </div>
-
-        <button id="start-btn" onclick="startGame()">
-            <span>LANCER LA RUN</span>
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;flex-shrink:0"><path d="M5 3l14 9-14 9V3z"/></svg>
-        </button>
     </div>
 
     <!-- ZONE JEU -->
@@ -341,8 +271,8 @@
     <!-- GAME OVER -->
     <div id="gameover-panel">
         <div class="go-inner">
-            <div class="go-eyebrow">Game Over</div>
-            <h2 class="go-title">RATTRAPÉ.</h2>
+            <div class="go-eyebrow">Partie terminée</div>
+            <h2 class="go-title">Rattrapé !</h2>
         </div>
         <div class="go-stats">
             <div class="go-stat">
@@ -388,7 +318,7 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js"></script>
+@vite(['resources/js/game.js'])
 <script>
 let selectedCharId = {{ $userCharacters->first()?->id ?? 'null' }};
 let selectedDiff   = 'normal';
@@ -420,9 +350,9 @@ function _buildGame() {
     return new Phaser.Game({
         type: Phaser.AUTO, width: 880, height: 420,
         parent: 'game-canvas-wrapper',
-        backgroundColor: '#000000',
+        backgroundColor: '#9fd3ee',
         physics: { default: 'arcade', arcade: { debug: false } },
-        scene: StreetScene
+        scene: _streetSceneClass()
     });
 }
 function startGame() {
@@ -441,8 +371,12 @@ function restartGame() {
 
 // ============================================================
 //  SCÈNE PRINCIPALE
+//  (encapsulée dans une fonction : Phaser est chargé via un module
+//  Vite différé, donc Phaser.Scene n'existe pas encore au moment où
+//  ce <script> classique s'exécute. On ne construit la classe qu'au
+//  lancement du jeu, quand window.Phaser est garanti disponible.)
 // ============================================================
-class StreetScene extends Phaser.Scene {
+function _streetSceneClass() { return class StreetScene extends Phaser.Scene {
     constructor() { super('StreetScene'); }
 
     create() {
@@ -467,8 +401,10 @@ class StreetScene extends Phaser.Scene {
         this.laneChangeCooldown = 0;
         this.flashColor         = null;
         this.flashAlpha         = 0;
-        this.monsterDist        = 0.88;
-        this.monsterX           = W / 2;
+        // Le monstre n'existe pas au début : il surgit seulement après ta
+        // première erreur, puis se rapproche un peu plus à chaque faute.
+        this.monsterActive      = false;
+        this.monsterDist        = 1.0;
         this.hitCooldown        = 0;
         this.spawnTimer         = 0;
 
@@ -476,8 +412,8 @@ class StreetScene extends Phaser.Scene {
         this.countdown       = 3;
         this.countdownActive = true;
         this.countTxt = this.add.text(W/2, H/2, '3', {
-            font: 'bold 110px Bangers', color: '#facc15',
-            stroke: '#000', strokeThickness: 8
+            font: 'bold 110px Bangers', color: '#fbbf24',
+            stroke: '#1e293b', strokeThickness: 8
         }).setOrigin(0.5).setDepth(10);
         this.time.addEvent({ delay: 1000, repeat: 2, callback: () => {
             this.countdown--;
@@ -502,18 +438,22 @@ class StreetScene extends Phaser.Scene {
         this.playerGfx = this.add.graphics().setDepth(3);
         this.hudGfx    = this.add.graphics().setDepth(4);
 
-        // HUD texts
-        this.scoreTxt = this.add.text(14, 12, 'SCORE: 0',
-            { font: 'bold 20px Bangers', color: '#facc15', letterSpacing: 2 }).setDepth(5);
+        // HUD texts (couleurs sombres + halo clair : lisibles sur le ciel clair)
+        this.scoreTxt = this.add.text(14, 12, 'SCORE: 0', {
+            font: 'bold 20px Bangers', color: '#1d4ed8', letterSpacing: 2,
+            stroke: '#ffffff', strokeThickness: 3,
+        }).setDepth(5);
         this.coinTxt  = this.add.text(14, 38, '🪙 0',
-            { font: '14px Inter', color: '#6b7280' }).setDepth(5);
+            { font: '14px Inter', color: '#92702f' }).setDepth(5);
         this.diffTxt  = this.add.text(W-14, 12,
-            selectedDiff === 'hard' ? 'HARD' : 'NORMAL',
-            { font: 'bold 14px Bangers', color: selectedDiff==='hard' ? '#dc2626' : '#3b82f6', letterSpacing: 3 })
-            .setOrigin(1,0).setDepth(5);
+            selectedDiff === 'hard' ? 'HARD' : 'NORMAL', {
+            font: 'bold 14px Bangers', letterSpacing: 3,
+            color: selectedDiff==='hard' ? '#dc2626' : '#1d4ed8',
+            stroke: '#ffffff', strokeThickness: 3,
+        }).setOrigin(1,0).setDepth(5);
         this.hintTxt  = this.add.text(W/2, H-11,
             selectedKeys === 'zqsd' ? 'Z=Sauter · Q/D=Voie' : '↑=Sauter · ←/→=Voie',
-            { font: '10px Inter', color: '#1a1a1a' }).setOrigin(0.5).setDepth(5);
+            { font: '10px Inter', color: '#5b5448' }).setOrigin(0.5).setDepth(5);
 
         // Touches
         const kb = this.input.keyboard;
@@ -554,7 +494,7 @@ class StreetScene extends Phaser.Scene {
     update(time, delta) {
         if (this.gameOver) return;
         if (this.countdownActive) {
-            this.drawBg(); this.drawPath(); this.drawMonster(1); this.drawPlayer(0); return;
+            this.drawBg(); this.drawPath(); this.drawMonster(); this.drawPlayer(0); return;
         }
 
         this.elapsed += delta;
@@ -582,54 +522,67 @@ class StreetScene extends Phaser.Scene {
 
         // Collisions
         for (const o of this.objects) {
-            if (o.depth < 0.90 || o.depth > 1.01) continue;
-            if (o.type === 'coin' && o.lane === this.lane) {
-                o.dead = true; this.coins++;
-                this.coinTxt.setText('🪙 ' + this.coins);
-                this.flashScreen(0xfacc15, 0.10);
-            }
-            if (o.type === 'jump' && o.lane === this.lane) {
-                if (this.jumping) { o.dead = true; }
-                else if (this.hitCooldown <= 0) {
-                    o.dead = true;
+            if (o.resolved) continue;
+
+            if (o.type === 'coin') {
+                if (o.depth >= 0.90 && o.depth <= 1.01 && o.lane === this.lane) {
+                    o.resolved = true; this.coins++;
+                    this.coinTxt.setText('🪙 ' + this.coins);
+                    this.flashScreen(0xfacc15, 0.10);
+                }
+            } else if (o.type === 'jump') {
+                // Fenêtre large : sauter à n'importe quel moment pendant l'approche évite l'obstacle
+                if (o.depth >= 0.78 && o.lane === this.lane) {
+                    if (this.jumping) {
+                        o.resolved = true;
+                        if (this.monsterActive) this.monsterDist = Math.min(1.0, this.monsterDist + 0.012);
+                    } else if (o.depth > 1.0 && this.hitCooldown <= 0) {
+                        o.resolved = true;
+                        this._hit();
+                        if (this.monsterDist <= 0) { this.triggerGameOver(); return; }
+                    }
+                }
+            } else if (o.type === 'lane') {
+                if (o.depth >= 0.90 && o.depth <= 1.01 && o.lane === this.lane && this.hitCooldown <= 0) {
+                    o.resolved = true;
                     this._hit();
                     if (this.monsterDist <= 0) { this.triggerGameOver(); return; }
                 }
             }
-            if (o.type === 'lane' && o.lane === this.lane && this.hitCooldown <= 0) {
-                o.dead = true;
-                this._hit();
-                if (this.monsterDist <= 0) { this.triggerGameOver(); return; }
-            }
         }
 
-        this.objects = this.objects.filter(o => o.depth <= 1.06 && !o.dead);
+        this.objects = this.objects.filter(o => o.depth <= 1.06);
 
         // Spawn
         this.spawnTimer += delta;
         const delay = Math.max(550, 1350 - this.elapsed * 0.035);
         if (this.spawnTimer >= delay) { this.spawnTimer = 0; this.spawnObject(); }
 
-        // Monstre distance
-        this.monsterDist = Math.min(1.0, this.monsterDist + delta * 0.000042);
-        this.monsterDist = Math.max(0,   this.monsterDist - delta * 0.000004);
-        if (this.monsterDist <= 0) { this.triggerGameOver(); return; }
-        if (this.monsterDist < 0.28)
-            this.flashScreen(0xef4444, 0.05 + (0.28 - this.monsterDist) * 0.18);
+        // Le monstre ne pourchasse qu'une fois réveillé par une de tes erreurs
+        // (cf. _hit) — tant que tu joues proprement, la voie est libre.
+        if (this.monsterActive && this.monsterDist < 0.32)
+            this.flashScreen(0xef4444, 0.04 + (0.32 - this.monsterDist) * 0.16);
 
         // Draw
         this.drawBg();
         this.drawPath();
-        this.drawMonster(this.monsterDist);
+        this.drawMonster();
         this.drawObjects(jumpOff);
         this.drawPlayer(jumpOff);
         this._drawHUD();
     }
 
     _hit() {
-        this.monsterDist -= 0.26;
-        this.hitCooldown  = 850;
-        this.flashScreen(0xef4444, 0.45);
+        if (!this.monsterActive) {
+            // Première erreur : le monstre surgit au loin et se met en chasse.
+            this.monsterActive = true;
+            this.monsterDist   = 0.62;
+        } else {
+            // Chaque nouvelle erreur le rapproche un peu plus de toi.
+            this.monsterDist -= 0.30;
+        }
+        this.hitCooldown = 850;
+        this.flashScreen(0xef4444, 0.30);
         this.cameras.main.shake(200, 0.011);
     }
 
@@ -656,7 +609,7 @@ class StreetScene extends Phaser.Scene {
         this.gameOver = true;
         lastScore = this.score; lastCoins = this.coins;
         lastDuration = Math.floor(this.elapsed / 1000);
-        this.flashScreen(0xef4444, 0.75);
+        this.flashScreen(0xef4444, 0.50);
         this.cameras.main.shake(380, 0.018);
         fetch('{{ route("game.score") }}', {
             method: 'POST',
@@ -678,63 +631,83 @@ class StreetScene extends Phaser.Scene {
         const g = this.bgGfx; g.clear();
         const fy = this.vp.y;
 
-        // Ciel nuit profond
-        g.fillGradientStyle(0x000000, 0x000000, 0x0a0a12, 0x0a0a12, 1);
+        // Ciel clair de matin (dégradé doux, pas de noir)
+        g.fillGradientStyle(0x9fd3ee, 0x9fd3ee, 0xeaf6fb, 0xeaf6fb, 1);
         g.fillRect(0, 0, this.W, fy + 25);
 
-        // Sol latéral
-        g.fillStyle(0x0d0d0d, 1);
+        // Soleil doux
+        const sunX = this.W * 0.80, sunY = fy * 0.32;
+        g.fillStyle(0xfff3c4, 0.45);
+        g.fillCircle(sunX, sunY, 42);
+        g.fillStyle(0xfffaeb, 0.95);
+        g.fillCircle(sunX, sunY, 22);
+
+        // Nuages
+        if (!this._clouds) this._clouds = [
+            { x: this.W*0.16, y: fy*0.32, s: 1.00 },
+            { x: this.W*0.46, y: fy*0.58, s: 0.70 },
+            { x: this.W*0.66, y: fy*0.24, s: 0.85 },
+        ];
+        this._clouds.forEach(c => {
+            g.fillStyle(0xffffff, 0.65);
+            g.fillEllipse(c.x,        c.y,        72*c.s, 22*c.s);
+            g.fillEllipse(c.x+28*c.s, c.y-9*c.s,  46*c.s, 20*c.s);
+            g.fillEllipse(c.x-26*c.s, c.y-5*c.s,  42*c.s, 17*c.s);
+        });
+
+        // Sol latéral clair
+        g.fillStyle(0xe7e1d6, 1);
         g.fillRect(0, fy + 25, this.W, this.H - fy - 25);
 
-        // Bâtiments
+        // Bâtiments pastel
         if (!this._bld) this._bld = [
-            { x:8,   w:52, h:105, wins:[[12,18],[12,40],[12,62],[32,18],[32,40]] },
-            { x:66,  w:33, h:72,  wins:[[8,14],[8,34],[20,14],[20,34]] },
-            { x:106, w:58, h:128, wins:[[10,18],[10,44],[10,70],[30,18],[30,44],[30,70],[46,18],[46,44]] },
-            { x:178, w:28, h:55,  wins:[[6,12],[6,32],[16,12]] },
-            { x:this.W-72,  w:48, h:98,  wins:[[8,18],[8,44],[28,18],[28,44]] },
-            { x:this.W-128, w:38, h:78,  wins:[[7,12],[7,32],[22,12],[22,32]] },
-            { x:this.W-190, w:54, h:118, wins:[[8,18],[8,48],[8,78],[28,18],[28,48],[28,78],[44,18],[44,48]] },
-            { x:this.W-252, w:33, h:62,  wins:[[7,12],[7,32],[20,12]] },
+            { x:8,   w:52, h:105, c:0xc7d4e3, wins:[[12,18],[12,40],[12,62],[32,18],[32,40]] },
+            { x:66,  w:33, h:72,  c:0xe9ddc9, wins:[[8,14],[8,34],[20,14],[20,34]] },
+            { x:106, w:58, h:128, c:0xd6e3d2, wins:[[10,18],[10,44],[10,70],[30,18],[30,44],[30,70],[46,18],[46,44]] },
+            { x:178, w:28, h:55,  c:0xc7d4e3, wins:[[6,12],[6,32],[16,12]] },
+            { x:this.W-72,  w:48, h:98,  c:0xe9ddc9, wins:[[8,18],[8,44],[28,18],[28,44]] },
+            { x:this.W-128, w:38, h:78,  c:0xd6e3d2, wins:[[7,12],[7,32],[22,12],[22,32]] },
+            { x:this.W-190, w:54, h:118, c:0xc7d4e3, wins:[[8,18],[8,48],[8,78],[28,18],[28,48],[28,78],[44,18],[44,48]] },
+            { x:this.W-252, w:33, h:62,  c:0xe9ddc9, wins:[[7,12],[7,32],[20,12]] },
         ];
         this._bld.forEach(b => {
             const by = fy - b.h + 22;
-            g.fillStyle(0x111827, 1);
+            g.fillStyle(b.c, 1);
             g.fillRect(b.x, by, b.w, b.h);
-            // Contour subtil
-            g.lineStyle(1, 0x1f2937, 1);
+            // Contour clair
+            g.lineStyle(1, 0xffffff, 0.55);
             g.strokeRect(b.x, by, b.w, b.h);
+            // Fenêtres calmes (lueur fixe, pas de scintillement agressif)
             b.wins.forEach(([wx,wy], i) => {
                 if (i % 3 === 1) return;
-                g.fillStyle(i%2===0 ? 0xfacc15 : 0x3b82f6, 0.55 + Math.sin(this.elapsed*0.0008 + i)*0.2);
+                g.fillStyle(0xfff3d6, 0.8);
                 g.fillRect(b.x+wx, by+wy, 7, 5);
             });
         });
 
-        // Lampadaires
+        // Lampadaires discrets
         [this.pathNear.left-15, this.pathNear.right+15].forEach(lx => {
             const dir = lx < this.W/2 ? 1 : -1;
-            g.fillStyle(0x1f2937, 1);
-            g.fillRect(lx-2, fy-25, 5, 55);
-            g.fillRect(lx, fy-23, dir*18, 3);
-            g.fillStyle(0xfacc15, 0.12);
-            g.fillCircle(lx + dir*18, fy-22, 16);
-            g.fillStyle(0xfacc15, 0.7);
-            g.fillCircle(lx + dir*18, fy-22, 4);
+            g.fillStyle(0x9aa6b2, 1);
+            g.fillRect(lx-2, fy-25, 4, 50);
+            g.fillRect(lx, fy-24, dir*14, 2);
+            g.fillStyle(0xfff3c4, 0.9);
+            g.fillCircle(lx + dir*14, fy-23, 3.5);
         });
 
-        // Graffiti
-        if (!this._graf) this._graf = [
-            {x:22, y:fy-14, w:38, h:16, c:0xdc2626},
-            {x:68, y:fy-7,  w:28, h:11, c:0xfacc15},
-            {x:this.W-58,  y:fy-11, w:34, h:15, c:0xdc2626},
-            {x:this.W-105, y:fy-20, w:26, h:11, c:0x3b82f6},
+        // Arbres (remplacent les graffitis, plus agréables à l'œil)
+        if (!this._trees) this._trees = [
+            { x: 26, s: 1.00 }, { x: this.W-34, s: 0.92 },
+            { x: this.W*0.30, s: 0.62 }, { x: this.W*0.70, s: 0.68 },
         ];
-        this._graf.forEach(gr => {
-            g.fillStyle(gr.c, 0.45);
-            g.fillRect(gr.x, gr.y, gr.w, gr.h);
-            g.fillStyle(gr.c, 0.2);
-            g.fillRect(gr.x+3, gr.y-4, gr.w*0.55, 3);
+        this._trees.forEach(t => {
+            const ty = fy + 4;
+            g.fillStyle(0x9c7a52, 1);
+            g.fillRect(t.x-3*t.s, ty-15*t.s, 6*t.s, 17*t.s);
+            g.fillStyle(0x9bcf8a, 0.95);
+            g.fillCircle(t.x, ty-23*t.s, 14*t.s);
+            g.fillStyle(0xc3e8b4, 0.85);
+            g.fillCircle(t.x-6*t.s, ty-27*t.s, 8*t.s);
         });
     }
 
@@ -743,39 +716,21 @@ class StreetScene extends Phaser.Scene {
         const { left:fl, right:fr, y:fy } = this.pathFar;
         const { left:nl, right:nr, y:ny } = this.pathNear;
 
-        // Trottoirs
-        g.fillStyle(0x111111, 1);
+        // Trottoirs clairs
+        g.fillStyle(0xd9d2c5, 1);
         g.fillPoints([{x:0,y:fy},{x:fl,y:fy},{x:nl,y:ny},{x:0,y:ny}], true);
         g.fillPoints([{x:fr,y:fy},{x:this.W,y:fy},{x:this.W,y:ny},{x:nr,y:ny}], true);
 
-        // Asphalte
-        g.fillStyle(0x1c1c1c, 1);
+        // Asphalte gris doux (au lieu d'un noir agressif)
+        g.fillStyle(0xb6b0a6, 1);
         g.fillPoints([{x:fl,y:fy},{x:fr,y:fy},{x:nr,y:ny},{x:nl,y:ny}], true);
 
-        // Highlight lane actuelle
-        {
-            const t = 0.93*0.93;
-            const lxN = fl + (nl-fl)*t, rxN = fr + (nr-fr)*t;
-            const lW = (rxN-lxN)/3;
-            const hx = lxN + lW*this.lane;
-            const hy = fy + (ny-fy)*t;
-            g.fillStyle(0x3b82f6, 0.07);
-            g.fillPoints([
-                {x: fl + (nl-fl)*0.1 + (fr-fl)*this.lane/3*0.1, y: fy+(ny-fy)*0.1},
-                {x: fl + (nl-fl)*0.1 + (fr-fl)*(this.lane+1)/3*0.1, y: fy+(ny-fy)*0.1},
-                {x: hx+lW, y: hy}, {x: hx, y: hy}
-            ], true);
-            // Indicateur bas de voie
-            g.fillStyle(0x3b82f6, 0.5);
-            g.fillRect(hx+4, ny-3, lW-8, 3);
-        }
-
-        // Bordures blanches
-        g.lineStyle(2, 0xe5e7eb, 0.7);
+        // Bordures blanches nettes
+        g.lineStyle(2, 0xffffff, 0.8);
         g.beginPath(); g.moveTo(fl,fy); g.lineTo(nl,ny); g.strokePath();
         g.beginPath(); g.moveTo(fr,fy); g.lineTo(nr,ny); g.strokePath();
 
-        // Lignes jaunes pointillées animées
+        // Lignes blanches pointillées animées (plus douces que le jaune vif)
         const dashOff = (this.elapsed * this.speed * 0.00042) % (1/9);
         for (let l = 1; l < 3; l++) {
             const ft = fl + (fr-fl)*l/3, nt = nl + (nr-nl)*l/3;
@@ -785,99 +740,73 @@ class StreetScene extends Phaser.Scene {
                 if (t1 > 1 || t0 < 0.02) continue;
                 const x0 = ft+(nt-ft)*t0, y0 = fy+(ny-fy)*t0;
                 const x1 = ft+(nt-ft)*t1, y1 = fy+(ny-fy)*t1;
-                g.lineStyle(0.8 + t0*2.5, 0xfacc15, 0.55 + t0*0.35);
+                g.lineStyle(0.8 + t0*2.5, 0xfdfdfd, 0.5 + t0*0.35);
                 g.beginPath(); g.moveTo(x0,y0); g.lineTo(x1,y1); g.strokePath();
             }
         }
 
-        // Lignes de vitesse
-        const spOff = (this.elapsed * this.speed * 0.00055) % (1/6);
-        for (let i = 0; i < 7; i++) {
-            const t = ((i/6 + spOff) % 1);
-            if (t < 0.04) continue;
-            const lx = fl+(nl-fl)*t, rx = fr+(nr-fr)*t, y = fy+(ny-fy)*t;
-            g.lineStyle(0.5+t*1.2, 0xffffff, t*0.12);
-            g.beginPath(); g.moveTo(lx,y); g.lineTo(rx,y); g.strokePath();
-        }
-
         // Kerb
-        g.fillStyle(0x374151, 1);
+        g.fillStyle(0x9c958a, 1);
         g.fillRect(0, fy-3, nl+1, 3);
         g.fillRect(nr-1, fy-3, this.W-nr+1, 3);
     }
 
-    drawMonster(dist) {
+    drawMonster() {
         const g = this.monsterGfx; g.clear();
-        const proximity = 1 - dist;
+        // Tant qu'aucune erreur n'a été commise, le monstre n'existe pas
+        // encore : la voie reste calme et dégagée.
+        if (!this.monsterActive) return;
 
-        // Toujours tracker la voie du joueur (smooth)
-        const pp = this.screenPos(this.lane, 0.97);
-        this.monsterX += (pp.x - this.monsterX) * 0.10;
-        const mx = this.monsterX;
+        // Il nous pourchasse DANS NOTRE DOS — hors-champ, là où la caméra ne
+        // regarde jamais. Impossible (et étrange) de le poser sur la route
+        // devant nous : on le montre comme une ombre menaçante qui surgit du
+        // bord inférieur de l'écran, juste derrière la caméra, et qui grandit
+        // jusqu'à nous engloutir. Le joueur (dessiné par-dessus) reste net.
+        const dist = this.monsterDist;
+        const p = Phaser.Math.Clamp((0.62 - dist) / 0.62, 0, 1); // 0 = vient de surgir, 1 = nous attrape
+        if (p <= 0.02) return;
 
-        // Position verticale : monte depuis le bas
-        const monsterBaseY = this.H + 22 + (1 - proximity) * 125;
-        const size = 48 + proximity * 105;
+        const cx = this.W / 2, baseY = this.H + 6;
+        const w = 100 + p * 300;
+        const h = 30 + p * 220;
 
-        // Skip si tête toujours sous l'écran
-        if (monsterBaseY - size * 1.85 > this.H) return;
+        // Halo rouge inquiétant
+        g.fillStyle(0xef4444, 0.05 + p * 0.15);
+        g.fillEllipse(cx, baseY, w * 1.5, h * 1.3);
 
-        // Aura rouge
-        if (dist < 0.38) {
-            g.fillStyle(0xef4444, (0.38 - dist) * 0.45);
-            g.fillCircle(mx, monsterBaseY - size*0.85, size*1.7);
+        // Masse sombre qui grimpe depuis le bas de l'écran
+        g.fillStyle(0x252a36, 0.55 + p * 0.35);
+        g.fillEllipse(cx, baseY, w, h);
+        g.fillStyle(0x1a1e27, 0.55 + p * 0.35);
+        g.fillEllipse(cx, baseY + h * 0.12, w * 0.6, h * 0.8);
+
+        // Yeux rouges luisants — n'apparaissent qu'à mi-approche
+        if (p > 0.30) {
+            const eyeA = Math.min(1, (p - 0.30) / 0.4);
+            const eyePulse = 0.6 + Math.sin(this.elapsed * 0.012) * 0.4;
+            const eyeY = baseY - h * 0.62, eyeR = 4 + p * 6;
+            g.fillStyle(0xef4444, eyeA * eyePulse);
+            g.fillCircle(cx - w*0.11, eyeY, eyeR);
+            g.fillCircle(cx + w*0.11, eyeY, eyeR);
+            g.fillStyle(0xffffff, eyeA * 0.5);
+            g.fillCircle(cx - w*0.11 - eyeR*0.3, eyeY - eyeR*0.3, eyeR*0.32);
+            g.fillCircle(cx + w*0.11 - eyeR*0.3, eyeY - eyeR*0.3, eyeR*0.32);
         }
 
-        // Ombre
-        g.fillStyle(0x000000, 0.35);
-        g.fillEllipse(mx, monsterBaseY - 3, size*1.9, size*0.28);
-
-        // Corps
-        g.fillStyle(0x0f172a, 1);
-        g.fillEllipse(mx, monsterBaseY - size*0.55, size*0.88, size*1.05);
-
-        // Tête
-        g.fillStyle(0x1e293b, 1);
-        g.fillCircle(mx, monsterBaseY - size*1.22, size*0.51);
-
-        // Yeux rouges
-        const eyeP = 0.6 + Math.sin(this.elapsed*0.009)*0.4;
-        g.fillStyle(0xef4444, eyeP);
-        g.fillCircle(mx - size*0.17, monsterBaseY - size*1.27, size*0.115);
-        g.fillCircle(mx + size*0.17, monsterBaseY - size*1.27, size*0.115);
-        g.fillStyle(0xfca5a5, 1);
-        g.fillCircle(mx - size*0.17, monsterBaseY - size*1.27, size*0.048);
-        g.fillCircle(mx + size*0.17, monsterBaseY - size*1.27, size*0.048);
-
-        // Cornes
-        g.fillStyle(0x334155, 1);
-        g.fillTriangle(mx-size*0.27, monsterBaseY-size*1.47, mx-size*0.13, monsterBaseY-size*1.74, mx-size*0.03, monsterBaseY-size*1.47);
-        g.fillTriangle(mx+size*0.27, monsterBaseY-size*1.47, mx+size*0.13, monsterBaseY-size*1.74, mx+size*0.03, monsterBaseY-size*1.47);
-
-        // Bras animés
-        const sw = Math.sin(this.elapsed * 0.013) * 11;
-        g.fillStyle(0x0f172a, 1);
-        g.fillRoundedRect(mx-size*0.82, monsterBaseY-size*0.78+sw, size*0.32, size*0.52, size*0.08);
-        g.fillRoundedRect(mx+size*0.50, monsterBaseY-size*0.78-sw, size*0.32, size*0.52, size*0.08);
-
-        // Dents
-        g.fillStyle(0xe2e8f0, 0.8);
-        for (let i = 0; i < 4; i++)
-            g.fillTriangle(
-                mx-size*0.18+i*size*0.12, monsterBaseY-size*1.07,
-                mx-size*0.12+i*size*0.12, monsterBaseY-size*0.93,
-                mx-size*0.06+i*size*0.12, monsterBaseY-size*1.07
-            );
-
-        // Lignes de vitesse
-        if (proximity > 0.32) {
-            const la = (proximity-0.32)*0.55;
-            g.lineStyle(2, 0xdc2626, la);
-            for (let i = 0; i < 4; i++) {
-                const ly = monsterBaseY - size*(0.18+i*0.2);
-                g.beginPath(); g.moveTo(mx-size*(0.95+i*0.2), ly); g.lineTo(mx-size*0.52, ly); g.strokePath();
-                g.beginPath(); g.moveTo(mx+size*0.52, ly); g.lineTo(mx+size*(0.95+i*0.2), ly); g.strokePath();
-            }
+        // Griffes qui s'agrippent sur les bords de l'écran quand il est tout proche
+        if (p > 0.62) {
+            const cA = (p - 0.62) / 0.38;
+            g.fillStyle(0x1a1e27, cA * 0.85);
+            [-1, 1].forEach(side => {
+                const clawX = cx + side * w * 0.46;
+                for (let i = -1; i <= 1; i++) {
+                    g.fillTriangle(
+                        clawX + i*9 - 4, baseY - h*0.40,
+                        clawX + i*9,     baseY - h*0.62,
+                        clawX + i*9 + 4, baseY - h*0.40
+                    );
+                }
+            });
         }
     }
 
@@ -906,7 +835,7 @@ class StreetScene extends Phaser.Scene {
             } else if (o.type === 'jump') {
                 // Zèbre jaune/noir au sol
                 const ox = lx2 + lW*o.lane, ow = lW*0.9, oh = 14*sc, oy = y-oh*0.5;
-                g.fillStyle(0x111111, 1);
+                g.fillStyle(0x334155, 1);
                 g.fillRect(ox, oy, ow, oh);
                 const ns = 5, sw2 = ow/ns;
                 for (let s = 0; s < ns; s += 2) {
@@ -950,8 +879,10 @@ class StreetScene extends Phaser.Scene {
 
     drawPlayer(jumpOff) {
         const g = this.playerGfx; g.clear();
-        const pos = this.screenPos(this.lane, 0.96, jumpOff);
-        const sc  = pos.scale * 0.88;
+        // Le joueur est avancé vers le bas de l'écran (plus proche de la
+        // caméra) pour bien le distinguer du monstre, qui reste en retrait.
+        const pos = this.screenPos(this.lane, 0.99, jumpOff);
+        const sc  = pos.scale * 0.92;
         const x = pos.x, y = pos.y;
         const bounce = this.jumping ? 0 : Math.sin(this.elapsed*0.014)*2;
 
@@ -993,16 +924,19 @@ class StreetScene extends Phaser.Scene {
             g.fillRect(0, 0, this.W, this.H);
             this.flashAlpha = Math.max(0, this.flashAlpha - 0.038);
         }
-        // Barre de proximité monstre (en haut au centre)
-        const bW = 160, bH = 3, bX = this.W/2-bW/2, bY = 10;
-        g.fillStyle(0x111111, 1);
+        // Barre de proximité monstre — n'apparaît qu'une fois le monstre réveillé
+        if (!this.monsterActive) return;
+        const bW = 160, bH = 4, bX = this.W/2-bW/2, bY = 10;
+        g.fillStyle(0xffffff, 0.55);
+        g.fillRect(bX-1, bY-1, bW+2, bH+2);
+        g.fillStyle(0xd8d2c5, 1);
         g.fillRect(bX, bY, bW, bH);
         const fill  = bW * this.monsterDist;
         const bCol  = this.monsterDist > 0.5 ? 0x22c55e : this.monsterDist > 0.28 ? 0xfacc15 : 0xdc2626;
         g.fillStyle(bCol, 0.9);
         g.fillRect(bX, bY, fill, bH);
     }
-}
+}; }
 
 // ============================================================
 //  COFFRE

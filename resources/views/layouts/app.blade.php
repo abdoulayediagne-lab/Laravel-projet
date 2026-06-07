@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Street Run') — Street Run</title>
+    <title>@yield('title', 'Street Run') - Street Run</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg:      #000;
-            --surface: #0a0a0a;
-            --border:  #141414;
-            --primary: #dc2626;
-            --accent:  #facc15;
-            --gold:    #facc15;
+            --bg:      #f6f4f0;
+            --surface: #ffffff;
+            --border:  #e7e1d6;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent:  #f59e0b;
+            --gold:    #f59e0b;
             --danger:  #ef4444;
-            --success: #22c55e;
-            --text:    #e5e7eb;
-            --muted:   #3d3d3d;
+            --success: #16a34a;
+            --text:    #33312c;
+            --muted:   #8a8478;
         }
 
         body {
@@ -31,8 +32,8 @@
         }
 
         nav {
-            background: #000;
-            border-bottom: 1px solid #111;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
             padding: 0 2rem;
             display: flex;
             align-items: center;
@@ -42,24 +43,17 @@
             top: 0;
             z-index: 100;
         }
-        nav::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 56px; height: 2px;
-            background: #dc2626;
-        }
 
         .nav-logo {
             font-family: 'Bangers', cursive;
             font-size: 1.6rem;
             letter-spacing: 4px;
-            color: #fff;
+            color: var(--text);
             text-decoration: none;
             text-transform: uppercase;
             position: relative;
         }
-        .nav-logo span { color: #dc2626; }
+        .nav-logo span { color: var(--primary); }
 
         .nav-links {
             display: flex;
@@ -69,7 +63,7 @@
         }
 
         .nav-links a {
-            color: #2d2d2d;
+            color: var(--muted);
             text-decoration: none;
             font-weight: 700;
             font-size: 0.72rem;
@@ -77,16 +71,18 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        .nav-links a:hover { color: #e5e7eb; }
+        .nav-links a:hover { color: var(--primary); }
 
         .nav-coins {
             display: flex;
             align-items: center;
             gap: 0.35rem;
-            border: 1px solid #1c1c1c;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
             padding: 0.25rem 0.7rem;
             font-weight: 800;
-            color: #facc15;
+            color: #b8790f;
             font-size: 0.78rem;
             letter-spacing: 1px;
         }
@@ -95,28 +91,29 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            padding: 0.45rem 1rem;
+            padding: 0.5rem 1.1rem;
             font-weight: 800;
             font-size: 0.72rem;
             cursor: pointer;
             border: none;
+            border-radius: 8px;
             text-decoration: none;
             transition: all 0.15s;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .btn-primary { background: #dc2626; color: #fff; }
-        .btn-primary:hover { background: #b91c1c; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: var(--primary-dark); }
 
-        .btn-accent { background: #facc15; color: #000; }
-        .btn-accent:hover { background: #eab308; }
+        .btn-accent { background: var(--accent); color: #fff; }
+        .btn-accent:hover { background: #d97f06; }
 
-        .btn-gold { background: #facc15; color: #000; }
-        .btn-gold:hover { background: #eab308; }
+        .btn-gold { background: var(--accent); color: #fff; }
+        .btn-gold:hover { background: #d97f06; }
 
-        .btn-outline { background: transparent; border: 1px solid #1c1c1c; color: #6b7280; }
-        .btn-outline:hover { border-color: #dc2626; color: #dc2626; }
+        .btn-outline { background: var(--surface); border: 1px solid var(--border); color: var(--muted); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
 
         main {
             padding: 2rem;
@@ -125,20 +122,21 @@
         }
 
         .card {
-            background: #080808;
-            border: 1px solid #141414;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
             padding: 1.5rem;
         }
 
-        .badge { display: inline-block; padding: 0.18rem 0.55rem; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
-        .badge-base      { background: rgba(107,114,128,0.15); color: #4b5563; border: 1px solid #1f2937; }
-        .badge-normal    { background: rgba(59,130,246,0.1);   color: #3b82f6; border: 1px solid rgba(59,130,246,0.25); }
-        .badge-legendary { background: rgba(250,204,21,0.1);   color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+        .badge { display: inline-block; padding: 0.18rem 0.55rem; border-radius: 6px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .badge-base      { background: rgba(100,116,139,0.1);  color: #64748b; border: 1px solid rgba(100,116,139,0.25); }
+        .badge-normal    { background: rgba(37,99,235,0.08);   color: #2563eb; border: 1px solid rgba(37,99,235,0.25); }
+        .badge-legendary { background: rgba(245,158,11,0.1);   color: #d97f06; border: 1px solid rgba(245,158,11,0.3); }
 
         #toast { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem; }
-        .toast-msg { background: #0a0a0a; border: 1px solid #141414; padding: 0.9rem 1.3rem; animation: slideIn 0.25s ease; max-width: 300px; font-size: 0.82rem; letter-spacing: 0.5px; }
-        .toast-msg.success { border-left: 3px solid #22c55e; }
-        .toast-msg.error   { border-left: 3px solid #dc2626; }
+        .toast-msg { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 6px 24px rgba(0,0,0,0.08); padding: 0.9rem 1.3rem; animation: slideIn 0.25s ease; max-width: 300px; font-size: 0.82rem; letter-spacing: 0.5px; color: var(--text); }
+        .toast-msg.success { border-left: 3px solid var(--success); }
+        .toast-msg.error   { border-left: 3px solid var(--danger); }
 
         @keyframes slideIn {
             from { transform: translateX(110%); opacity: 0; }

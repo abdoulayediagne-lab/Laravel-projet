@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreScoreRequest;
 use App\Models\Character;
 use App\Models\Score;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
@@ -35,33 +35,26 @@ class GameController extends Controller
     }
 
     // Sauvegarder le score après une run
-    public function saveScore(Request $request)
+    public function saveScore(StoreScoreRequest $request)
     {
-        $request->validate([
-            'score'           => 'required|integer|min:0',
-            'coins_collected' => 'required|integer|min:0',
-            'difficulty'      => 'required|in:normal,hard',
-            'duration'        => 'required|integer|min:0',
-            'character_id'    => 'nullable|exists:characters,id',
-        ]);
-
+        $data = $request->validated();
         $user = Auth::user();
 
         // Sauvegarder le score
         Score::create([
             'user_id'         => $user->id,
-            'character_id'    => $request->character_id,
-            'score'           => $request->score,
-            'coins_collected' => $request->coins_collected,
-            'difficulty'      => $request->difficulty,
-            'duration'        => $request->duration,
+            'character_id'    => $data['character_id'] ?? null,
+            'score'           => $data['score'],
+            'coins_collected' => $data['coins_collected'],
+            'difficulty'      => $data['difficulty'],
+            'duration'        => $data['duration'],
         ]);
 
         // Ajouter les pièces au wallet du joueur
-        $user->addCoins($request->coins_collected);
+        $user->addCoins($data['coins_collected']);
 
         // Donner un coffre si la run est terminée
-        $chestType = $request->difficulty === 'hard' ? 'legendary' : 'normal';
+        $chestType = $data['difficulty'] === 'hard' ? 'legendary' : 'normal';
 
         return response()->json([
             'success'    => true,

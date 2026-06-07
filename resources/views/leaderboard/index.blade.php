@@ -4,35 +4,35 @@
 @push('styles')
 <style>
     .lb-header { margin-bottom: 2rem; }
-    .lb-header h1 { font-family: 'Bangers', cursive; font-size: 2.5rem; letter-spacing: 3px; }
-    .lb-header p  { color: #64748b; margin-top: 0.3rem; }
+    .lb-header h1 { font-family: 'Bangers', cursive; font-size: 2.5rem; letter-spacing: 3px; color: var(--text); }
+    .lb-header p  { color: var(--muted); margin-top: 0.3rem; }
 
     .lb-table { width: 100%; border-collapse: collapse; }
     .lb-table th {
         text-align: left; padding: 0.8rem 1rem; font-size: 0.8rem;
-        text-transform: uppercase; letter-spacing: 1px; color: #64748b;
-        border-bottom: 1px solid #2a2a50;
+        text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
+        border-bottom: 1px solid var(--border);
     }
-    .lb-table td { padding: 1rem; border-bottom: 1px solid #1e293b; }
-    .lb-table tr:hover td { background: rgba(124,58,237,0.05); }
+    .lb-table td { padding: 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
+    .lb-table tr:hover td { background: rgba(37,99,235,0.04); }
 
     .rank { font-family: 'Bangers', cursive; font-size: 1.4rem; letter-spacing: 1px; }
-    .rank-1 { color: #fbbf24; }
+    .rank-1 { color: #d97f06; }
     .rank-2 { color: #94a3b8; }
-    .rank-3 { color: #cd7c2e; }
+    .rank-3 { color: #b8762f; }
 
     .player-name { font-weight: 700; }
-    .char-info { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #94a3b8; }
+    .char-info { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--muted); }
 
-    .score-val { font-family: 'Bangers', cursive; font-size: 1.6rem; color: #e2e8f0; letter-spacing: 1px; }
+    .score-val { font-family: 'Bangers', cursive; font-size: 1.6rem; color: var(--primary); letter-spacing: 1px; }
 
     .my-score-banner {
-        background: rgba(124,58,237,0.1); border: 1px solid #7c3aed;
+        background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.3);
         border-radius: 12px; padding: 1.2rem 1.5rem; margin-bottom: 2rem;
         display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
     }
-    .my-score-banner .label { color: #94a3b8; font-size: 0.9rem; }
-    .my-score-banner .val   { font-family: 'Bangers', cursive; font-size: 1.8rem; color: #a78bfa; letter-spacing: 1px; }
+    .my-score-banner .label { color: var(--muted); font-size: 0.9rem; }
+    .my-score-banner .val   { font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--primary); letter-spacing: 1px; }
 </style>
 @endpush
 
@@ -61,7 +61,7 @@
     </div>
     @else
     <div class="my-score-banner">
-        <span style="color:#64748b;">Tu n'as pas encore joué !</span>
+        <span style="color:var(--muted);">Tu n'as pas encore joué !</span>
         <a href="{{ route('game.index') }}" class="btn btn-primary">🎮 Jouer maintenant</a>
     </div>
     @endif
@@ -97,23 +97,23 @@
                         <span>{{ $entry->character->name }}</span>
                     </div>
                     @else
-                    <span style="color:#334155;">—</span>
+                    <span style="color:var(--border);">-</span>
                     @endif
                 </td>
                 <td><span class="score-val">{{ number_format($entry->score) }}</span></td>
-                <td style="color:#fbbf24; font-weight:700;">{{ $entry->coins_collected }}</td>
+                <td style="color:#b8790f; font-weight:700;">{{ $entry->coins_collected }}</td>
                 <td>
                     <span class="badge {{ $entry->difficulty === 'hard' ? 'badge-legendary' : 'badge-normal' }}">
                         {{ $entry->difficulty === 'hard' ? '🔴 Difficile' : '🟦 Normal' }}
                     </span>
                 </td>
-                <td style="color:#64748b;">{{ $entry->duration }}s</td>
+                <td style="color:var(--muted);">{{ $entry->duration }}s</td>
             </tr>
             @endforeach
         </tbody>
     </table>
     @else
-    <div style="text-align:center; padding:3rem; color:#64748b;">
+    <div style="text-align:center; padding:3rem; color:var(--muted);">
         <div style="font-size:3rem; margin-bottom:1rem;">🏃</div>
         <p>Personne n'a encore joué. Sois le premier !</p>
         @auth<a href="{{ route('game.index') }}" class="btn btn-primary" style="margin-top:1rem;">🎮 Jouer</a>@endauth

@@ -29,7 +29,7 @@ class CharacterSeeder extends Seeder
         ]);
 
         // ---- PERSOS NORMAUX (coffres normaux) ----
-        // Probabilités sur 100 — chaque élève de la promo
+        // Probabilités sur 100, chaque élève de la promo
         $normalStudents = [
             ['name' => 'Lucas',    'slug' => 'lucas',    'emoji' => '🙋', 'color' => '#10b981', 'probability' => 5],
             ['name' => 'Emma',     'slug' => 'emma',     'emoji' => '👩', 'color' => '#f43f5e', 'probability' => 5],
@@ -59,7 +59,7 @@ class CharacterSeeder extends Seeder
                 'slug'        => 'karl',
                 'emoji'       => '👑',
                 'color'       => '#fbbf24',
-                'probability' => 1,       // 1% — rare
+                'probability' => 1,       // 1%, rare
             ],
             [
                 'name'        => 'Aurélie',
@@ -80,7 +80,7 @@ class CharacterSeeder extends Seeder
                 'slug'        => 'adrien',
                 'emoji'       => '💎',
                 'color'       => '#67e8f9',
-                'probability' => 0.01,    // 0.01% — ultra rare
+                'probability' => 0.01,    // 0.01%, ultra rare
             ],
         ];
 
